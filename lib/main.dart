@@ -1,4 +1,6 @@
-import 'package:api_test/Homepage.dart';
+
+import 'package:api_test/Home_Screen.dart';
+import 'package:api_test/SceondExample.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,13 +13,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(),
+    return const MaterialApp(
+   debugShowCheckedModeBanner: false,
+      home:  SceondApiTest(),
     );
   }
 }
