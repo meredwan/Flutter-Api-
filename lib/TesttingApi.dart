@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-
 import 'package:http/http.dart' as http;
 
 class TestApi2 extends StatefulWidget {
@@ -12,21 +11,21 @@ class TestApi2 extends StatefulWidget {
 }
 
 class _TestApi2State extends State<TestApi2> {
-  List<TodoModel> getTodoList = [];
+  List<TodoModel> todoList = [];
 
-  Future<List<TodoModel>> getApi() async {
+  Future<List<TodoModel>> gettodo() async {
     final response =
         await http.get(Uri.parse("https://jsonplaceholder.typicode.com/todos"));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
       for (Map i in data) {
-        TodoModel gettodo =
+        TodoModel todos =
             TodoModel(title: i["title"], completed: i["completed"]);
-        getTodoList.add(gettodo);
+        todoList.add(todos);
       }
-      return getTodoList;
+      return todoList;
     } else {
-      return getTodoList;
+      return todoList;
     }
   }
 
@@ -34,33 +33,25 @@ class _TestApi2State extends State<TestApi2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Api Test"),
+        title: Text("Api"),
       ),
       body: Column(
         children: [
-          Expanded(
-            child: FutureBuilder(
-                future: getApi(),
-                builder: ((context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: Text("kisui pai nai"),
-                    );
-                  } else {
-                    return ListView.builder(
-                        itemCount: getTodoList.length,
-                        itemBuilder: ((context, index) {
-                          return Container(
-                            child: Column(
-                              children: [
-                                Text(getTodoList[index].title.toString())
-                              ],
-                            ),
-                          );
-                        }));
-                  }
-                })),
-          )
+          FutureBuilder(
+            future: gettodo(),
+            builder: ((context, snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(
+                child: Text("please insert data"),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: todoList.length,
+                itemBuilder: ((context, index) {
+                return Text(todoList[index].title);
+              }));
+            }
+          }))
         ],
       ),
     );
