@@ -31,60 +31,58 @@ class _ProductApiState extends State<ProductApi> {
         centerTitle: true,
         title: const Text("Api Integration"),
       ),
-
-      body: Column(),
-      // body: Column(
-      //   children: [
-      //     Expanded(
-      //       child: FutureBuilder<ProductsModel>(
-      //         future: getproductApi(),
-      //         builder: ((context, snapshot) {
-      //           if (snapshot.hasData) {
-      //             return ListView.builder(
-      //               itemCount: snapshot.data!.data!.length,
-      //               itemBuilder: ((context, index) {
-      //                 return Column(
-      //                   children: [
-      //                     ListTile(
-      //                       title: Text(snapshot.data!.data![index].shop!.name
-      //                           .toString()),
-      //                     ),
-      //                     // Container(
-      //                     //   height: MediaQuery.of(context).size.height * .25,
-      //                     //   width: MediaQuery.of(context).size.width * .1,
-      //                     //   child: ListView.builder(
-      //                     //       itemCount:
-      //                     //           snapshot.data!.data![index].images!.length,
-      //                     //       itemBuilder: (context, position) {
-      //                     //         return Container(
-      //                     //             height:
-      //                     //                 MediaQuery.of(context).size.height *
-      //                     //                     .25,
-      //                     //             width: MediaQuery.of(context).size.width *
-      //                     //                 .5,
-      //                     //             decoration: BoxDecoration(
-      //                     //               image: DecorationImage(
-      //                     //                   image: NetworkImage(snapshot
-      //                     //                       .data!
-      //                     //                       .data![index]
-      //                     //                       .images![position]
-      //                     //                       .url
-      //                     //                       .toString())),
-      //                     //             ));
-      //                     //       }),
-      //                     // ),
-      //                   ],
-      //                 );
-      //               }),
-      //             );
-      //           } else {
-      //             return Center(child: Text("Loading"));
-      //           }
-      //         }),
-      //       ),
-      //     )
-      //   ],
-      // ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<ProductsModel>(
+              future: getproductApi(),
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.data!.length,
+                    itemBuilder: ((context, index) {
+                      return Column(
+                        children: [
+                          ListTile(
+                            title: Text(snapshot.data!.data![index].shop!.name
+                                .toString()),
+                          ),
+                          // Container(
+                          //   height: MediaQuery.of(context).size.height * .25,
+                          //   width: MediaQuery.of(context).size.width * .1,
+                          //   child: ListView.builder(
+                          //       itemCount:
+                          //           snapshot.data!.data![index].images!.length,
+                          //       itemBuilder: (context, position) {
+                          //         return Container(
+                          //             height:
+                          //                 MediaQuery.of(context).size.height *
+                          //                     .25,
+                          //             width: MediaQuery.of(context).size.width *
+                          //                 .5,
+                          //             decoration: BoxDecoration(
+                          //               image: DecorationImage(
+                          //                   image: NetworkImage(snapshot
+                          //                       .data!
+                          //                       .data![index]
+                          //                       .images![position]
+                          //                       .url
+                          //                       .toString())),
+                          //             ));
+                          //       }),
+                          // ),
+                        ],
+                      );
+                    }),
+                  );
+                } else {
+                  return Center(child: Text("Loading"));
+                }
+              }),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
