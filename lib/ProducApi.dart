@@ -42,7 +42,6 @@ class _ProductApiState extends State<ProductApi> {
                     itemCount: snapshot.data!.data!.length,
                     itemBuilder: ((context, index) {
                       return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           ListTile(
@@ -50,36 +49,27 @@ class _ProductApiState extends State<ProductApi> {
                                 .toString()),
                           ),
                           Container(
-                            padding: EdgeInsets.all(10),
-                            height: MediaQuery.of(context).size.height * .3,
-                            width: MediaQuery.of(context).size.width * 1,
+                            height: MediaQuery.of(context).size.height * .25,
+                            width: MediaQuery.of(context).size.width * .1,
                             child: ListView.builder(
-                                scrollDirection: Axis.horizontal,
                                 itemCount:
                                     snapshot.data!.data![index].images!.length,
                                 itemBuilder: (context, position) {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .25,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .5,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(snapshot
-                                                  .data!
-                                                  .data![index]
-                                                  .images![position]
-                                                  .url
-                                                  .toString())),
-                                        )),
-                                  );
+                                  return Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              .25,
+                                      width: MediaQuery.of(context).size.width *
+                                          .5,
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: NetworkImage(snapshot
+                                                .data!
+                                                .data![index]
+                                                .images![position]
+                                                .url
+                                                .toString())),
+                                      ));
                                 }),
                           ),
                         ],
