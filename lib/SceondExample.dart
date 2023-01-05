@@ -17,6 +17,7 @@ class _SceondApiTestState extends State<SceondApiTest> {
         .get(Uri.parse("https://jsonplaceholder.typicode.com/photos"));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
+      print(response.body);
       for (Map i in data) {
         Photos photos = Photos(title: i['title'], url: i["url"], id: i["id"]);
         photoList.add(photos);
