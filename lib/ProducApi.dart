@@ -31,60 +31,69 @@ class _ProductApiState extends State<ProductApi> {
         centerTitle: true,
         title: const Text("Api Integration"),
       ),
-
-      body: Column(),
-      // body: Column(
-      //   children: [
-      //     Expanded(
-      //       child: FutureBuilder<ProductsModel>(
-      //         future: getproductApi(),
-      //         builder: ((context, snapshot) {
-      //           if (snapshot.hasData) {
-      //             return ListView.builder(
-      //               itemCount: snapshot.data!.data!.length,
-      //               itemBuilder: ((context, index) {
-      //                 return Column(
-      //                   children: [
-      //                     ListTile(
-      //                       title: Text(snapshot.data!.data![index].shop!.name
-      //                           .toString()),
-      //                     ),
-      //                     // Container(
-      //                     //   height: MediaQuery.of(context).size.height * .25,
-      //                     //   width: MediaQuery.of(context).size.width * .1,
-      //                     //   child: ListView.builder(
-      //                     //       itemCount:
-      //                     //           snapshot.data!.data![index].images!.length,
-      //                     //       itemBuilder: (context, position) {
-      //                     //         return Container(
-      //                     //             height:
-      //                     //                 MediaQuery.of(context).size.height *
-      //                     //                     .25,
-      //                     //             width: MediaQuery.of(context).size.width *
-      //                     //                 .5,
-      //                     //             decoration: BoxDecoration(
-      //                     //               image: DecorationImage(
-      //                     //                   image: NetworkImage(snapshot
-      //                     //                       .data!
-      //                     //                       .data![index]
-      //                     //                       .images![position]
-      //                     //                       .url
-      //                     //                       .toString())),
-      //                     //             ));
-      //                     //       }),
-      //                     // ),
-      //                   ],
-      //                 );
-      //               }),
-      //             );
-      //           } else {
-      //             return Center(child: Text("Loading"));
-      //           }
-      //         }),
-      //       ),
-      //     )
-      //   ],
-      // ),
+      body: Column(
+        children: [
+          Expanded(
+            child: FutureBuilder<ProductsModel>(
+              future: getproductApi(),
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.data!.length,
+                    itemBuilder: ((context, index) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          ListTile(
+                            title: Text(snapshot.data!.data![index].shop!.name
+                                .toString()),
+                          ),
+                          Container(
+                            padding: EdgeInsets.all(10),
+                            height: MediaQuery.of(context).size.height * .3,
+                            width: MediaQuery.of(context).size.width * 1,
+                            child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount:
+                                    snapshot.data!.data![index].images!.length,
+                                itemBuilder: (context, position) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .25,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .5,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(snapshot
+                                                  .data!
+                                                  .data![index]
+                                                  .images![position]
+                                                  .url
+                                                  .toString())),
+                                        )),
+                                  );
+                                }),
+                          ),
+                        ],
+                      );
+                    }),
+                  );
+                } else {
+                  return Center(child: Text("Loading"));
+                }
+              }),
+            ),
+          )
+        ],
+      ),
     );
   }
 }
